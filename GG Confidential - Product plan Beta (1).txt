@@ -1,0 +1,1138 @@
+﻿A vertically integrated aesthetic longevity platform that measures and verifies personal ageing signals, then translates them into data-driven protocols 
+For beta, we stick with tracking as core
+
+
+
+
+1.1 Product Category
+App for aesthetic longevity intelligence:
+* detects how old the face looks today
+* estimates persistent face-age drift
+* estimates rate of ageing ++ a rate of recovery/reversal
+* identifies what is causing acceleration
+* proves what slows/reverses visible ageing for this user
+1.2 Core Promise
+ provides a decomposed FaceAge system, not a vanity score:
+* Structural FaceAge (slow-moving, deconfounded)
+* Reversible Ageing Burden (daily/weekly “looks older” load) - hook - 
+* Recovery Capacity / Resilience (how well face rebounds) -
+* FaceAge Velocity (trend)
+* FaceAge vs Chronological Age delta
+* FaceAge vs Bio-Resilience Age proxy delta (recovery biology proxy)
+1.3 Non-Negotiable Product Principle
+No opaque “AI age” number without decomposition, confidence, and evidence.
+________________
+
+
+2. CORE INPUTS (SPINE)
+2.1 Input A — Daily Face Capture (required)
+5-second video with two phases:
+* Neutral face
+* Guided smile
+Why both are required
+* Neutral = static appearance ageing signal
+* Smile = dynamic expression / tissue-behavior / structural response signal
+* Combined = higher signal quality than static selfies and harder to copy        
+________________
+
+
+2.2 Input B — Biweekly Tissue Capture (required every 15 days)
+Finger Press + Hold + Release video on fixed skin zone
+Product purpose
+* tissue rebound / damping / recovery behavior proxy
+* resilience scoring
+* recovery capacity confidence
+* structural ageing confidence modifier
+* rate-of-ageing estimator stabilization (reduces false structural alarms)
+________________
+
+
+2.3 Structured Inputs (minimal friction)
+Required daily
+* sleep_duration (categorical)
+Adaptive prompts (max 1/day)
+* alcohol
+* sodium load
+* sleep timing
+* stress
+* new/changed product
+* Travel
+* illnesses
+* nothing unusual (clean baseline)
+Triggered / sparse
+* hydration
+* exercise type
+* cycle phase
+* sun exposure
+* illness/travel/stress event
+* treatment/procedure event
+________________
+
+
+3. CORE OUTPUT SYSTEM (WHAT USER PAYS/USES FOR)
+3.1 Daily Outputs
+* Daily Ageing Signals (what made face look older/younger today)
+* Driver Ranking (with lag + confidence)
+* One next-best protocol/test
+* Prediction for tomorrow / next window
+* Verification of previous prediction
+3.2 Biweekly Outputs (Press Cycle)
+* Resilience Score
+* Recovery Capacity trend
+* Recovery Strain trend
+* Ageing Pressure update
+* Structural confidence support/contradiction
+* Resilience response to protocols/products (threshold-gated)
+3.3 Slow Outputs (30d+)
+* Structural Drift status
+* Structural FaceAge
+* Reversible FaceAge Offset
+* FaceAge Display (decomposed)
+* FaceAge Velocity (decomposed + confidence-gated)
+* FaceAge vs Chronological Age delta
+* FaceAge vs Bio-Resilience Age proxy delta
+________________
+
+
+4. AGE MODEL 
+4.1 Chronological Age (CA)
+* user-entered date of birth
+* fixed anchor
+* used only as reference baseline and delta comparator
+* not used to force daily score movement
+________________
+
+
+4.2 FaceAge Display (FAD)
+What the face appears like today, decomposed:
+* FAD = SFA + RAB
+Where:
+* SFA = Structural FaceAge (slow, deconfounded)
+* RAB = Reversible Ageing Burden (daily/weekly burden that makes face look older)
+________________
+
+
+4.3 Structural FaceAge (SFA)
+Slow-moving estimate from deconfounded structural/dynamic trends:
+* persistent residual drift after subtracting short-term exposure effects
+* stability- and quality-gated
+* modified by resilience evidence support/contradiction
+________________
+
+
+4.4 Reversible Ageing Burden (RAB)
+Short-term burden that inflates perceived age:
+* puffiness load- 
+* under-eye vitality drop
+* redness/reactivity load
+* dullness/luminosity loss
+* face instability / volatility burden
+Moves fast with:
+* sleep/alcohol/sodium/stress/products/illness/travel
+________________
+
+
+4.5 Bio-Resilience Age Proxy (BRA) (product-defined biological proxy)
+ cannot claim true clinical biological age without biomarkers. Product should compute a recovery biology proxy age from tissue behavior + recovery dynamics.
+BRA Inputs
+* press/release rebound features
+* recovery speed after perturbations
+* volatility burden
+* recovery strain
+* resilience trend stability
+* contradiction-adjusted repeatability
+Output
+* Bio-Resilience Age Proxy
+* BRA confidence
+* BRA trend
+* BRA vs Chronological Age delta
+This gives a second age axis:
+* Face looks older today (RAB high) but recovery biology stable (BRA stable)
+* or face looks okay today but recovery biology worsening (early warning)
+________________
+
+
+4.6 Core Deltas (user-facing)
+* FaceAge Display - Chronological Age
+* Structural FaceAge - Chronological Age
+* Bio-Resilience Age Proxy - Chronological Age
+* FaceAge Display - Bio-Resilience Age Proxy (appearance burden gap)- not needed
+________________
+
+
+5. RATE OF AGEING (IP)
+5.1 Ageing Rate Is Not One Number
+ computes three rates:
+A. Apparence Velocity (fast)
+How quickly visible age appearance is changing (reversible-heavy)
+B. Structural Velocity (slow)
+Residual slope of structural face-age component after deconfounding
+C. Pressure-Adjusted Velocity Risk (forward risk)
+Risk proxy that current habits/recovery/resilience will accelerate visible structural ageing if sustained
+________________
+
+
+5.2 FaceAge Velocity Decomposition
+* FAV_display
+* FAV_structural
+* FAV_risk
+User sees:
+* What changed
+* Why it changed
+* Whether it is temporary
+* What to do to slow/reverse
+________________
+
+
+5.3 Reversal Logic (visible + structural)
+Reversible reversal
+RAB drops due to sleep/alcohol/sodium/stress/product correction
+Recovery reversal
+Recovery strain drops + resilience improves + faster return-to-baseline
+Structural reversal candidate
+Residual structural slope improves over sufficient window and contamination low and press/resilience supports (or does not contradict)
+No “reverse ageing” claims without thresholded evidence.
+________________
+
+
+6. STATE ONTOLOGY (USER-FACING)
+6.1 Daily Ageing Appearance States (Input A)
+* Puffiness Load
+* Under-eye Vitality
+* Redness / Reactivity Load
+* Luminosity / Dullness
+* Face Stability (volatility meta-state)
+6.2 Recovery / Tissue States (A + B)
+* Recovery Strain
+* Recovery Capacity
+* Resilience
+* Ageing Pressure
+6.3 Slow / Confidence-Gated States
+* Structural Drift
+* Structural FaceAge
+* Reversible FaceAge Offset
+* FaceAge Display
+* FaceAge Velocity
+* Bio-Resilience Age Proxy
+________________
+
+
+7. VECTOR ONTOLOGY (ENGINE LAYER)
+7.1 Input A — Neutral Phase Vectors
+* infraorbital fullness/shadow proxies
+* periorbital chroma contrast proxies
+* local redness (LAB a* / heatmap) proxies
+* reflectance/brightness proxies
+* tone variance proxies
+* fast texture fluctuation proxies
+* local asymmetry fluctuation proxies (appearance layer only unless deconfounded)
+7.2 Input A — Guided Smile Vectors
+* eye aperture dynamic response
+* cheek lift symmetry response
+* nasol`abial expression response proxies
+* dynamic shadow redistribution
+* movement symmetry / stiffness proxies
+* dynamic fold visibility response (trend-gated)
+* expression rebound tendency (if derivable)
+7.3 Input B — Press/Release Vectors
+* rebound time proxy
+* early rebound slope
+* late rebound slope
+* damping / settling stability proxy
+* residual deformation proxy
+* curve quality score
+* repeatability score
+* zone-specific delta vs baseline
+7.4 Weekly Trend Vectors
+* jawline definition trend
+* eye aperture trend
+* tone evenness trend
+* texture trend
+* volatility clustering metrics
+* recovery duration trend
+7.5 Structural Vectors (slow channel)
+* deconfounded nasolabial trend
+* deconfounded brow position trend
+* deconfounded symmetry trend
+* deconfounded texture drift
+* deconfounded tone drift
+* deconfounded dynamic expression response drift
+* structural composite[a]
+________________
+
+
+8. EXPOSURE ONTOLOGY (CAUSES OF AGEING / REVERSAL)
+8.1 Exposure Classes
+Class A — Daily Baseline
+Sleep / alcohol / sodium / stress / sleep timing / etc.
+Class B — Protocols (intentional tests/interventions)
+Diet / exercise / products / lifestyle / recovery / treatment prep-post
+Class C — Product Exposures
+Skincare product timeline by zone + frequency
+Class D — Perturbation Events
+Travel, illness, intense sun, social streaks, crying, major stress, treatment/procedure
+Class E — Clean Baseline
+Nothing unusual (control data)
+________________
+
+
+8.2 Causal Framing 
+ makes within-person causal hypotheses with confidence; not medical diagnosis.
+Cause classes user sees
+* likely trigger
+* likely amplifier
+* likely protector
+* likely stabilizer
+* conditional trigger
+* unresolved / mixed
+________________
+
+
+9. CORRELATION ENGINE 
+9.1 Engine Goal
+Map Exposure → State / Vector → FaceAge component with:
+* lag
+* cumulative load
+* conditions/interactions
+* contradiction handling
+* evidence thresholds
+* confidence bands
+________________
+
+
+9.2 Baseline + Normalization Pipeline (mandatory)
+Per vector:
+1. capture quality gating
+2. normalization weights (lighting/framing/distance/motion)
+3. rolling personal baselines (7d / 30d / long baseline)
+4. personal noise bands estimation from clean windows
+5. structural eligibility tagging
+Personal Noise Bands
+* no change
+* small change
+* meaningful change
+* large change
+Used in:
+* daily signal detection
+* prediction success rules
+* protocol/product verdicts
+* structural updates
+* FaceAge movement gating
+________________
+
+
+9.3 Layer 1 — Lagged Delta Correlation
+Purpose
+Identify short-lag drivers of daily state movement.
+Lags
+* T0
+* T+1
+* T+2
+Workflow
+1. select target state/vector
+2. build exposure-present windows
+3. build matched control windows
+4. compare delta distributions per lag
+5. measure sign consistency
+6. measure effect vs personal noise band
+7. apply capture quality weighting
+8. apply confound and perturbation penalties
+9. emit ranked hypotheses
+Output
+Per state:
+* top driver list with lag, direction, effect band, confidence, confound risk
+________________
+
+
+9.4 Layer 2 — Cumulative Load Correlation
+Purpose
+Detect threshold/streak effects missed by single-event logic.
+Modeled loads
+* alcohol clustering
+* sleep debt
+* stress streaks
+* repeated reactivity flares
+* product consecutive use buildup
+* recovery streak benefit
+Workflow
+1. compute rolling exposure load (2/3/5/7-day windows)
+2. compare single-event vs streak effect
+3. detect threshold points
+4. convert hypothesis to conditional if threshold-dependent
+5. update driver ranking and protocol suggestions
+Output examples
+* “Alcohol weak on single nights, strong after 3-night streak”
+* “Sleep debt amplifies under-eye and dullness beyond night-1 effect”
+________________
+
+
+9.5 Layer 3 — Protocol Effect Correlation (What Reverses Ageing Burden)
+Unit
+ProtocolRun
+Evaluate on Appearance Axis (Input A)
+* target state direction and magnitude
+* lag alignment (T0/T+1/T+2/7d)
+* spillover states
+* Face Stability effect
+* Recovery Strain effect
+* adherence-response relationship
+* contradictions
+* confound burden
+Evaluate on Recovery/Resilience Axis (Input B; gated)
+* rebound time changes
+* slope changes
+* settling/damping behavior
+* residual deformation changes
+* repeatability/quality
+Output
+ProtocolTruthCard
+* appearance verdict
+* recovery verdict
+* resilience verdict
+* confidence
+* maturity
+* conditions
+* reusability score
+________________
+
+
+9.6 Layer 4 — Product Attribution Correlation
+Attribution Modes
+* Start Effect
+* Stop Effect
+* Use-Day Effect
+* Consecutive-Use Effect
+* Recovery-After-Stop
+* Delayed Effect
+Rules
+* zone-aware attribution
+* overlap confound graph
+* no false certainty under stacked changes
+* insufficient preferred over fake attribution
+Output
+ProductTruthCard
+* helps / harms / mixed / no signal / insufficient
+* affected states
+* lag
+* confounds
+* conditions
+* confidence
+* maturity
+________________
+
+
+9.7 Layer 5 — Interaction Effects (Conditional Ageing Logic)
+Purpose
+Model “X matters only when Y” or “X becomes worse under Y”.
+Examples
+* alcohol × late sleep → puffiness amplification
+* sodium × cycle phase → puffiness sensitivity
+* product × low sleep → redness/reactivity flare
+* hydration × no alcohol → stronger luminosity effect
+* stress × irregular sleep → face stability collapse
+* improvement in appearance + declining resilience → false positive reversal risk
+Gating
+* base effects must mature first
+* sufficient overlap samples
+* stable sign
+* confounds below threshold
+Output
+Conditional hypotheses and protocol suggestions.
+________________
+
+
+9.8 Layer 6 — Contradiction Handling (Retention + Accuracy)
+Contradiction Types
+* expected effect absent
+* unexpected effect present
+* competing exposures
+* measurement uncertainty
+* prediction miss
+* appearance/resilience divergence
+* adherence failure
+System behavior
+1. classify contradiction
+2. downgrade/rerank hypotheses
+3. log contradiction
+4. generate next disambiguation experiment
+5. trigger one adaptive prompt if needed
+6. protect trust (no fake certainty)
+Contradictions are treated as signal, not engine failure.
+________________
+
+
+10. FACEAGE CALCULATION LOGIC (ACCURACY + SCALE)
+10.1 Daily State-to-Burden Mapping (RAB)
+Daily states map to reversible age burden contributions:
+* puffiness contribution
+* under-eye vitality contribution
+* redness/reactivity contribution
+* dullness/luminosity contribution
+* instability contribution
+Rule
+Daily burden updates only on meaningful change beyond personal noise band.
+________________
+
+
+10.2 Structural Drift Estimation (SFA Input)
+Structural Eligibility Window
+Window is eligible only if:
+* capture quality acceptable
+* normalization confidence acceptable
+* acute perturbation contamination below threshold
+* unresolved flare distortion below threshold
+* sufficient stable comparison windows
+Deconfounding Pipeline (per structural vector)
+1. observed trend
+2. subtract short-lag modeled effects (Layer 1)
+3. subtract cumulative load effects (Layer 2)
+4. subtract known short-term protocol/product effects
+5. downweight contaminated windows
+6. fit residual slope over 30/60/90d windows
+7. detect change points
+8. apply resilience support/contradiction modifier (Input B)
+9. update StructuralDriftEstimate
+________________
+
+
+10.3 Structural FaceAge (SFA) Computation
+Inputs:
+* structural drift estimates across eligible vectors
+* trend stability
+* contamination rate
+* press/resilience support
+* confidence weights
+Output:
+* StructuralFaceAge
+* SFA confidence
+* dominant structural contributors
+Rules
+* no SFA movement for insufficient evidence
+* missing/low-confidence vectors do not force movement
+* confidence shown with score
+________________
+
+
+10.4 Bio-Resilience Age Proxy (BRA) Computation
+Inputs:
+* press/release curve features (primary)
+* recovery duration after perturbations
+* recovery strain
+* volatility burden
+* resilience trend stability
+* repeatability
+Output:
+* BRA
+* BRA confidence
+* BRA trend
+Purpose
+Biology/recovery proxy axis to prevent over-reliance on appearance-only signals.
+________________
+
+
+10.5 FaceAge Display (FAD)
+FAD = SFA + RAB
+Display always includes:
+* decomposition
+* confidence
+* what changed since last period
+* how much is reversible vs structural
+________________
+
+
+10.6 FaceAge Velocity (FAV)
+Components
+* FAV_display: slope of FaceAge Display over recent window
+* FAV_structural: slope of Structural FaceAge
+* FAV_risk: pressure-adjusted forward acceleration risk from Ageing Pressure + BRA trend + Recovery Capacity
+User output
+* slowing / stable / accelerating / unclear
+* confidence
+* dominant causes
+* top reversible levers
+* next best verification protocol
+________________
+
+
+10.7 Reversal Detection Logic
+Reversible Reversal
+RAB decline confirmed over repeated windows; cause attribution confidence improves.
+Recovery Reversal
+Recovery strain drops + resilience improves + shorter recovery durations.
+Structural Reversal Candidate
+Residual structural slope improves on eligible windows + contamination low + resilience support not contradictory.
+Final user wording logic
+* “reversible improvement” (fast)
+* “recovery improvement” (mid-term)
+* “possible structural improvement” (gated)
+* “structural improvement” (high evidence only)
+________________
+
+
+11. CONFIDENCE SYSTEM 
+11.1 Confidence Inputs
+* evidence count / replicates
+* effect size vs personal noise
+* sign consistency
+* lag coherence
+* control contrast strength
+* capture quality
+* confound burden
+* contradiction rate
+* repeatability (press curves)
+* structural contamination rate
+11.2 Bands
+* Low
+* Medium
+* High
+11.3 Maturity States 
+* hypothesis
+* emerging
+* promising
+* validated
+* conditional
+* drifting
+* retired
+Upgrade rules
+Repeatability + contrast + low confound + low contradiction
+Downgrade rules
+Effect collapse, repeated misses, contradictory outcomes, high contamination
+________________
+
+
+12. PREDICTION / VERIFICATION LOOP 
+12.1 Prediction Generation
+Generate only when:
+* measurable target exists
+* evaluable lag window exists
+* success rule is objective
+* confound level acceptable (or explicitly listed)
+12.2 Prediction Card Fields
+* target state / faceage component
+* predicted direction
+* magnitude band
+* window (T0/T+1/T+2/7d/15d if press-linked)
+* confidence band
+* basis hypotheses
+* what may break prediction
+* linked protocol/test
+12.3 Verification Outcomes
+* hit
+* partial
+* miss
+* inconclusive
+Updates:
+* confidence
+* ranking
+* contradiction archive
+* next experiment queue
+* truth memory
+12.4 Visible Reliability Score
+* hit rate by state
+* hit rate by confidence band
+* best-predicted states
+* still-learning states
+________________
+
+
+13. PROTOCOL RECOMMENDATION ENGINE (WHAT CAUSES/REVERSES AGEING)
+13.1 Protocol Categories
+* Diet
+* Exercise
+* Products
+* Lifestyle
+* Treatments
+* Recovery / Repair
+* Diagnostic / Disambiguation
+13.2 Protocol Types
+Diagnostic
+Separates competing hypotheses (cause-finding)
+Corrective
+Improves target state quickly (appearance burden reduction)
+Stabilization
+Reduces volatility and recovery strain
+Structural-Support
+Targets long-term ageing pressure and recovery biology
+Pre/Post Treatment
+Improves outcome observability and recovery tracking
+________________
+
+
+13.3 Recommendation Inputs
+* current state severity
+* state volatility
+* recovery strain / capacity
+* Ageing Pressure
+* BRA trend
+* SFA/FAV confidence
+* ranked hypotheses (lag + cumulative + conditions)
+* truth memory (triggers/protectors/protocol wins/fails)
+* product truths
+* contradiction archive
+* adherence history
+* cost/burden tolerance
+* access (home / clinic / product availability)
+* safety/contraindication flags
+________________
+
+
+13.4 Recommendation Scoring
+Score = ExpectedImprovement + InformationGain + ObservabilityFit + AdherenceProbability + StabilityGain + AgeingPressureReduction + BRAImprovementPotential + RevenueAlignment - ConfoundRisk - BurdenPenalty - RedundancyPenalty - ConflictPenalty
+RevenueAlignment (in-product business logic)
+Higher score if protocol can be:
+* proven fast
+* linked to marketplace product (future)
+* linked to clinic workflow (future)
+* produce shareable result proof (Day-30 and beyond)
+Revenue alignment never overrides safety/confidence gating.
+________________
+
+
+13.5 Protocol Library Schema (ProtocolSpec)
+* protocol_id
+* name
+* category (diet/exercise/product/lifestyle/treatment/recovery/diagnostic)
+* objective_type (diagnostic/corrective/stabilization/structural_support/pre/post_treatment)
+* target_states[]
+* target_vectors[]
+* expected_direction_by_state{}
+* mechanism_tags[]
+* observability_window
+* minimum_duration
+* recommended_duration
+* minimum_adherence_threshold
+* measurement_requirements (daily face / press relevance)
+* contraindication_tags[]
+* conflict_tags[]
+* dependencies[]
+* burden_score
+* cost_score
+* clinic_required
+* marketplace_linkable
+* content_pack_id
+* safety_tier
+* region_availability[]
+* version
+* is_active
+________________
+
+
+13.6 Cause/Reverse Mapping by Core States (Product Logic)
+13.6.1 Puffiness Load
+Likely causes
+* alcohol
+* sodium load
+* late sleep
+* stress
+* cycle sensitivity
+* travel/illness (perturbation)
+Reversal protocols
+* no alcohol night
+* low-salt day
+* early sleep night
+* hydration push
+* recovery day
+* social-event damage-control cadence
+* sleep consistency block
+Correlation logic
+* prioritize T+1 and 3-day cumulative load
+* interaction testing: alcohol × late sleep, sodium × cycle phase
+________________
+
+
+13.6.2 Under-eye Vitality
+Likely causes
+* sleep duration/timing
+* alcohol
+* hydration deficit
+* recovery strain
+* illness/stress streaks
+Reversal protocols
+* sleep recovery night
+* early sleep block
+* hydration push
+* no alcohol
+* 3-day recovery block
+* stability block
+Correlation logic
+* T+1 strong, cumulative sleep debt, recovery-capacity interaction
+________________
+
+
+13.6.3 Redness / Reactivity Load
+Likely causes
+* product irritation/overlap
+* alcohol
+* sun/heat
+* stress
+* sleep deficit
+* treatment/procedure downtime
+Reversal protocols
+* skin-rest day
+* simplified stack block
+* product pause
+* redness reset block
+* sun-discipline block
+* low-trigger week
+Correlation logic
+* T0/T+1 strong
+* consecutive-use product buildup
+* interaction: product × low sleep, product × stress
+________________
+
+
+13.6.4 Luminosity / Dullness
+Likely causes
+* sleep deficit
+* hydration deficit
+* low movement
+* processed/sugar load
+* recovery burden
+Reversal protocols
+* hydration push
+* movement/cardio day
+* early sleep
+* processed-light day
+* 3-day luminosity recovery block
+Correlation logic
+* T+1 and cumulative load
+* interaction: hydration × alcohol absence, movement × sleep quality
+________________
+
+
+13.6.5 Face Stability (Volatility)
+Likely causes
+* irregular sleep
+* stress streaks
+* travel
+* product churn
+* social-event clusters
+* illness
+Reversal protocols
+* stability block
+* sleep consistency
+* simplified stack
+* travel recovery
+* low-confound baseline block
+* recovery cadence
+Correlation logic
+* volatility clustering + recovery duration + perturbation density
+________________
+
+
+13.6.6 Recovery Strain / Ageing Pressure / BRA
+Likely causes
+* chronic volatility
+* repeated perturbations
+* alcohol clustering
+* chronic poor sleep
+* repeated reactivity flares
+* resilience decline
+* unresolved treatment overload / product overload
+Reversal / structural-support protocols
+* sleep regularity block
+* low-load week
+* social-event spacing cadence
+* reactivity suppression plan
+* product simplification
+* treatment prep/post-treatment observation
+* recovery cadence block
+Correlation logic
+* slower windows + press/release evidence
+* repeated ProtocolRun outcomes
+* resilience trend agreement
+________________
+
+
+14. CONTENT SYSTEM (HOW PROTOCOLS SCALE)
+14.1 Content Architecture
+A. ProtocolSpec (machine logic)
+Drives recommendation engine and evaluation.
+B. ContentPack (user-facing execution content)
+Localized, tiered, versioned.
+C. MediaAssets
+Short instruction clips, diagrams, report visuals, share visuals.
+________________
+
+
+14.2 Content Objects
+ContentPack
+* content_pack_id
+* protocol_id
+* language
+* region
+* tier_required (free / 299 / 499)
+* headline_template
+* why_this_now_template
+* steps_modules[]
+* measurement_module
+* expected_results_module
+* confounds_module
+* safety_module
+* adherence_module
+* faq_modules[]
+* report_templates[]
+* share_templates[]
+* media_asset_ids[]
+* version
+* clinical_review_status
+* published_status
+ContentModule
+* step / why / safety / measurement / expectation / faq / report text / share text
+* templated placeholders
+* tier + region + language versioning
+________________
+
+
+14.3 Hosting / Delivery
+* versioned backend registry for ProtocolSpec
+* headless CMS for ContentPack + ContentModule
+* object storage + CDN for media
+* runtime personalization from structured outputs only
+* LLM allowed only for phrasing, never inference math
+________________
+
+
+15. TRUTH MEMORY (LOCK-IN)
+15.1 Components
+* Trigger Profiles (per state)
+* Protector Profiles
+* Protocol Truth Library
+* Product Truth Library
+* Recovery Map
+* Contradiction Archive
+* Face Stability Timeline
+* Resilience Trend Memory
+* BRA Trend Memory
+* Ageing Trajectory Memory
+* FaceAge History (decomposed)
+* Structural Change-Point Log
+15.2 Why this is moat
+Screenshots can copy UI; they cannot copy a user’s validated personal ageing physics.
+________________
+
+
+16. PRODUCT SURFACES (WHAT USER SEES)
+16.1 Daily
+* Daily Ageing Signals Card
+* Driver Ranking Card (lag/confidence)
+* Prediction Check Card
+* Next Protocol/Test Card
+* Tomorrow Prediction Card
+16.2 Weekly
+* anti-ageing summary
+* top causes / protectors
+* truth upgrades/downgrades
+* contradictions and resolution plan
+* stability + recovery summary
+* protocol outcome summary
+16.3 Biweekly (Press)
+* Resilience Score update
+* Recovery Capacity trend
+* BRA update
+* Ageing Pressure update
+* structural confidence support/contradiction
+* protocol/product resilience insights (gated)
+16.4 FaceAge Screen
+* Chronological Age
+* Structural FaceAge
+* Reversible Ageing Burden
+* FaceAge Display
+* FaceAge Velocity
+* Bio-Resilience Age Proxy
+* all deltas and confidence bands
+* dominant causes / reversers
+________________
+
+
+17.1 Free — KEEP THE APP FREE - make revenue through marketplace 
+* daily capture loop
+* basic daily ageing signals
+* limited driver ranking
+* basic protocol/prediction
+* limited history
+* teaser biweekly resilience output
+* no full report
+17.2 ₹599 (Insight)
+* full driver ranking + lag/confidence
+* prediction history + reliability score
+* weekly summaries
+* protocol truth cards (appearance + recovery)
+* recovery map
+* extended history
+* standard Day-30 anti-ageing report
+* standard Day-30 share pack
+17.3 ₹799 (Deep Data / Pro)
+* all ₹599 features +
+* resilience trend memory + deeper curve summaries
+* BRA + BRA trend
+* Ageing Pressure decomposition
+* Structural Drift view (eligible only)
+* Structural FaceAge + FaceAge Velocity deep view
+* advanced interaction effects
+* detailed product truth + confound details
+* premium Day-30 report + social share pack
+17.4 Conversion Triggers
+* first validated truth
+* prediction streak / reliability visible
+* first strong resilience update (press cycle)
+* Day-30 report ready
+* Day-30 social pack ready
+________________
+18. DAY-30 REPORT + SOCIAL SHARING
+
+
+18.1 Day-30 Detailed Report (anti-ageing-first)
+
+
+₹599
+* capture consistency + quality
+* daily ageing signal trends
+* top triggers/protectors
+* protocol outcomes
+* recovery map
+* prediction accuracy
+* contradiction summary
+* next 30-day plan
+₹799
+* resilience trend and curve interpretation
+* BRA trend
+* Ageing Pressure decomposition
+* Structural Drift status (if eligible)
+* Structural FaceAge + FaceAge Velocity
+* interaction effects
+* detailed product truth
+* confidence audit
+18.2 Social Share Pack (Day-30+)
+* milestone card
+* top trigger/protector cards
+* prediction accuracy card
+* protocol result card
+* recovery map card
+* resilience/BRA card (₹799)
+* FaceAge decomposition/velocity card (₹799)
+All share assets must include confidence labels where inference-heavy.
+________________
+________________
+
+
+19. SCALING / EFFICIENCY PRODUCT RULES 
+19.1 Low-Friction Inputs
+* only one required daily structured input (sleep)
+* adaptive prompts max 1/day
+* event-driven prompting for disambiguation only
+19.2 Compute Gating
+* high-cost inference only on quality-eligible captures
+* structural updates only on structural-eligible windows
+* interaction effects only after base effects mature
+* treatment/product deep attribution only after sample thresholds
+19.3 Trust Gating
+* no ungated causal claims
+* no structural ageing claims from daily noise
+* no high-confidence outputs from low-quality capture
+* no fake product verdict under confounds
+* contradictions surfaced, not hidden
+
+
+________________
+
+
+20. LLM BOUNDARIES SUGGESTED
+20.1 LLM Not Allowed In
+* vector extraction
+* state detection
+* correlation scoring
+* confidence math
+* protocol ranking
+* prediction success checks
+* resilience/BRA scoring
+* structural drift estimation
+* FaceAge / Velocity computation
+20.2 LLM Allowed In
+* report narration
+* protocol explanation phrasing
+* localization variants
+* share copy
+* FAQ responses from structured outputs
+LLM cannot change inference outputs.
+________________
+
+
+21. RATE-OF-AGEING IP
+21.1 Patentable Product Logic Areas
+1. Dual-capture longitudinal ageing inference
+   * daily neutral+smile video + periodic press/release video fusion
+2. Decomposed FaceAge model
+   * structural age + reversible burden + resilience proxy + velocity
+3. Deconfounded structural velocity estimator
+   * subtract lagged/cumulative/protocol/product effects before structural slope estimation
+4. Press/release resilience support/contradiction modifier
+   * biomechanical signal modifies structural confidence and ageing-pressure interpretation
+5. Contradiction-driven experiment generator
+   * prediction misses automatically generate disambiguation tests to improve ageing-cause certainty
+6. Personal ageing truth memory
+   * cause/reversal memories with lag/conditions/confidence/maturity tracking
+7. FaceAge vs Bio-Resilience Age proxy delta framework
+   * appearance-age vs recovery-biology divergence as product signal
+8. Change-point classification for ageing regime shifts
+   * perturbation vs temporary burden vs structural drift vs treatment response classification
+________________
+
+
+22. KPI SYSTEM (ACCURACY + VALUE + REVENUE)
+22.1 Accuracy / Trust
+* prediction hit rate by state
+* hit rate by confidence band
+* contradiction resolution rate
+* truth upgrade rate
+* structural eligibility rate
+* structural confidence coverage
+* BRA repeatability confidence rate
+* % outputs shown with low confidence (keep bounded)
+22.2 Retention / Habit
+* daily capture completion
+* D7 / D14 / D30 retention
+* press-cycle completion
+* protocol acceptance / completion
+* weekly summary opens
+
+
+22.3 Monetization
+* free → ₹599 conversion
+* ₹599 → ₹799 upgrade
+* Day-30 report unlock conversion
+* share pack unlock conversion
+* renewal by tier
+* 
+
+22.4 Moat Validation
+* % users saying data too valuable to lose
+* average validated truths per user
+* average conditional truths per user
+* average contradiction-resolved experiments per user
+* % users with decomposed FaceAge confidence upgrade over time
+________________
+
+
+23. FINAL PRODUCT BEHAVIOR SUMMARY
+Daily
+* capture neutral + smile video
+* detect daily ageing signals
+* rank causes with lag/confidence
+* suggest one protocol/test to reduce burden or increase certainty
+* predict next outcome
+* verify and update truths
+Every 15 Days
+* capture press/hold/release video
+* update resilience, recovery capacity, BRA
+* refine Ageing Pressure and structural confidence
+* strengthen/contradict rate-of-ageing interpretation
+Over Time
+* separates temporary “looks older today” noise from persistent face-age drift
+* computes decomposed FaceAge and Velocity
+* identifies causes of acceleration and reversers for this user
+* builds a high-value, hard-to-copy aesthetic longevity record
+* monetizes via deeper inference, reports, and shareable proof without corrupting accuracy logic
+
+
+[a]Are these very slow moving ?

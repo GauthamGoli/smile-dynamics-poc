@@ -1,0 +1,151 @@
+<!doctype html>
+<!-- Run:  cd smile_dynamics/poc && python3 serve.py   (then open http://localhost:8765/) -->
+<!-- serve.py serves this dir AND accepts POST /save { filename, content } writing to ./results/ -->
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Smile Dynamics POC</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        background: #0b0b0d;
+        color: #e6e6e6;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 13px;
+      }
+      header {
+        padding: 10px 14px;
+        border-bottom: 1px solid #222;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      header h1 { font-size: 14px; margin: 0; font-weight: 500; }
+      header .status { margin-left: auto; opacity: 0.7; }
+      main { display: grid; grid-template-columns: minmax(720px, 1440px) 1fr; gap: 14px; padding: 14px; }
+      .stage { position: relative; background: #000; border: 1px solid #222; aspect-ratio: 16 / 9; align-self: start; overflow: hidden; max-width: 1440px; }
+      .stage video, .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .stage video { transform: scaleX(-1); object-fit: cover; }
+      .stage canvas { transform: scaleX(-1); pointer-events: none; }
+      aside { align-self: start; max-height: 70vh; overflow: auto; min-width: 280px; border: 1px solid #222; padding: 10px; background: #0f0f12; }
+      aside h2 { font-size: 12px; text-transform: uppercase; opacity: 0.6; margin: 0 0 8px; }
+      .hud-row { display: flex; justify-content: space-between; padding: 2px 0; }
+      .hud-row span:last-child { font-variant-numeric: tabular-nums; }
+      .hud-row-dyn {
+        display: grid;
+        grid-template-columns: 1fr 64px 44px;
+        grid-template-rows: auto auto;
+        align-items: center;
+        gap: 2px 6px;
+        padding: 3px 0 5px;
+        font-size: 11px;
+        border-bottom: 1px solid #14141a;
+      }
+      .hud-row-dyn .hud-label { grid-column: 1; grid-row: 1; opacity: 0.85; }
+      .hud-row-dyn .hud-val   { grid-column: 2; grid-row: 1; text-align: right; font-variant-numeric: tabular-nums; }
+      .hud-row-dyn .hud-cv    { grid-column: 3; grid-row: 1; text-align: right; font-size: 10px; opacity: 0.75; font-variant-numeric: tabular-nums; }
+      .hud-row-dyn .hud-spark {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        height: 24px;
+        display: block;
+        background: #0a0a0c;
+        border: 1px solid #1a1a22;
+        box-sizing: border-box;
+      }
+      #log { margin-top: 14px; padding: 10px; border: 1px solid #222; background: #0f0f12; max-height: 220px; overflow: auto; }
+      #log pre { margin: 0; white-space: pre-wrap; word-break: break-word; }
+      #error { color: #ff6a6a; padding: 8px 14px; display: none; }
+      button { background: #1a1a1f; color: #e6e6e6; border: 1px solid #333; padding: 6px 10px; cursor: pointer; font: inherit; }
+      button:hover { background: #24242a; }
+      button:disabled { opacity: 0.4; cursor: not-allowed; }
+      #roi-toggles label { display: flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer; }
+      #roi-toggles label .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+      .picker.hidden { display: none; }
+      .picker {
+        position: absolute; inset: 0;
+        background: rgba(0,0,0,0.72);
+        display: flex; align-items: center; justify-content: center;
+        z-index: 10;
+      }
+      .picker-card {
+        background: #17171c; border: 1px solid #333;
+        padding: 20px; border-radius: 10px;
+        display: flex; flex-direction: column; gap: 10px;
+        min-width: 260px; text-align: center;
+      }
+      .picker-title { font-size: 14px; opacity: 0.8; margin-bottom: 6px; }
+      .picker-card button { padding: 14px; font-size: 16px; }
+      .picker-card button[data-person] { background: #1f3344; border-color: #3a6c8e; }
+      .picker-card button[data-person]:hover { background: #27425b; }
+      .picker-card button.picker-cancel { background: transparent; opacity: 0.7; font-size: 13px; padding: 8px; }
+      .history-tab, .view-tab { font-size: 11px; padding: 4px 10px; }
+      .history-tab.active, .view-tab.active { background: #27425b; border-color: #3a6c8e; }
+      #history-panel {
+        padding: 14px;
+        border: 1px solid #222;
+        background: #0f0f12;
+        margin: 0 14px;
+      }
+      #history-panel.panel-hidden { display: none; }
+      .main-hidden { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>smile dynamics poc</h1>
+      <button id="btn-calibrate" disabled>Calibrate</button>
+      <button id="btn-capture" disabled>Start capture (3 trials)</button>
+      <button id="btn-history">Session history</button>
+      <span class="status" id="status">booting…</span>
+    </header>
+    <div id="error"></div>
+    <main>
+      <div class="stage">
+        <video id="cam" playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div id="person-picker" class="picker hidden" role="dialog" aria-label="Select person">
+          <div class="picker-card">
+            <div class="picker-title" id="picker-title">Who's capturing?</div>
+            <button data-person="Sameen">Sameen</button>
+            <button data-person="GG">GG</button>
+            <button class="picker-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <h2>Live HUD</h2>
+        <div id="hud">
+          <div class="hud-row"><span>fps</span><span id="hud-fps">—</span></div>
+          <div class="hud-row"><span>face detected</span><span id="hud-face">—</span></div>
+        </div>
+        <h2 style="margin-top: 14px">ROI toggles</h2>
+        <div id="roi-toggles"></div>
+        <h2 style="margin-top: 14px">Session result</h2>
+        <div id="session-result">no captures yet</div>
+      </aside>
+    </main>
+    <div id="history-panel" class="panel-hidden">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <h2 style="margin:0;font-size:16px;font-weight:500">Session history</h2>
+        <div id="session-history-tabs" style="display:flex;gap:6px">
+          <button class="history-tab" data-person="Sameen">Sameen</button>
+          <button class="history-tab" data-person="GG">GG</button>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="view-tab active" data-view="list">List</button>
+          <button class="view-tab" data-view="trends">Trends</button>
+        </div>
+        <button id="btn-history-close" style="margin-left:auto">Back</button>
+      </div>
+      <div id="session-history-list" style="overflow:auto">loading…</div>
+      <div id="session-history-trends" style="overflow:auto;display:none"></div>
+    </div>
+    <div id="log"><pre id="log-pre">(log)</pre></div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
